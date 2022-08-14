@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.List;
  * @description : 게시판 컨트롤러
  **/
 
+@RequestMapping(path = "/board")
 public class BoardController {
 
 
@@ -21,46 +23,46 @@ public class BoardController {
     private BoardService boardService;
 
 
-    @GetMapping("board/getBoardList")
+    @GetMapping("/getBoardList")
     public String getBoardList(Model model, Board board) {
         System.out.println("-------------------");
         List<Board> boardList = boardService.getBoardList(board);
         model.addAttribute("boardList", boardList);
-        return "board/getBoardList";
+        return "/board/getBoardList";
     }
 
-    @GetMapping("board/insertBoard")
+    @GetMapping("/insertBoard")
     public String insertBoardView() {
         System.out.println("-------------------");
-        return "board/insertBoard";
+        return "/board/insertBoard";
     }
 
-    @PostMapping("board/insertBoard")
+    @PostMapping("/insertBoard")
     public String insertBoard(Board board) {
         System.out.println("-------------------");
         boardService.insertBoard(board);
-        return "redirect:board/getBoardList";
+        return "redirect:/board/getBoardList";
     }
 
-    @GetMapping("board/getBoard")
+    @GetMapping("/getBoard")
     public String getBoard(Board board, Model model) {
         System.out.println("-------------------");
         model.addAttribute("board", boardService.getBoard(board));
-        return "board/getBoard";
+        return "/board/getBoard";
     }
 
-    @PostMapping ("board/updateBoard")
+    @PostMapping ("/updateBoard")
     public String updateBoard(Board board) {
         System.out.println("-------------------");
         boardService.updateBoard(board);
-        return "redirect:board/getBoard?documentSrl="+board.getSeq();
+        return "redirect:/board/getBoard?documentSrl="+board.getSeq();
     }
 
-    @GetMapping("board/updateBoard")
+    @GetMapping("/updateBoard")
     public String updateBoardView(Board board, Model model) {
         System.out.println("-------------------");
         model.addAttribute("board", boardService.getBoard(board));
-        return "board/insertBoard";
+        return "/board/insertBoard";
     }
 
     @Transactional
@@ -68,6 +70,6 @@ public class BoardController {
     public String deleteBoard(Board board) {
         System.out.println("-------------------");
         boardService.deleteBoard(board);
-        return "redirect:getBoardList";
+        return "redirect:/getBoardList";
     }
 }
