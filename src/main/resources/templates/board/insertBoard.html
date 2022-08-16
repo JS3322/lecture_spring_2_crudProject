@@ -12,7 +12,7 @@
         mothod="post" // get/post방식으로 데이터 전달 명시하다
         [서버]컨트롤러에서는 get방식 받는 것과 post방식으로 받는 것을 구분할 수 있습니다
     -->
-    <form th:action="board/insertBoard" method="post">
+    <form th:action="/board/insertBoard" method="post">
         <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0">
             <tr>
                 <td bgcolor="#add8e6" th:text="제목" width="80"></td>

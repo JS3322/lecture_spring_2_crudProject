@@ -43,13 +43,13 @@ public class BoardController {
 
     @GetMapping("/insertBoard")
     public String insertBoardView() {
-        System.out.println("-------------------");
-        return "/board/insertBoard";
+        System.out.println("------inserBoard_get-------------");
+        return "/board/insetBoard";
     }
 
     @PostMapping("/insertBoard")
     public String insertBoard(Board board) {
-        System.out.println("-------------------");
+        System.out.println("--------insertBoard_get-----------");
         boardService.insertBoard(board);
         return "redirect:/board/getBoardList";
     }
