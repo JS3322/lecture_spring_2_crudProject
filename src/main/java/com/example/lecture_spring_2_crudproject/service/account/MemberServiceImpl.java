@@ -17,6 +17,20 @@ public class MemberServiceImpl implements MemberService {
     protected MemberServiceImpl(MemberRepository memberRepo) {
         this.memberRepo = memberRepo;
     }
+
+    //public : 공개
+    //List<Member> : 리턴타입은 List 속성은 Member
+    //retrun memberRepository의 findMemberByEmailOrId메서드를 실행한 리턴 데이터
+    @Override
+    public Member getMemberWhereIdOrEmail(String Email, String Id) {
+        return memberRepo.findMemberByEmailOrId(Email, Id);
+    }
+
+    @Override
+    public Member getMemberWhereIdAndROWNUL1(String id) {
+        return memberRepo.findFirstById(id);
+    }
+
     //모든 회원의 정보를 가져다 오는 것
     //return List<Member> : 모든 회원의 정보를 List배열에 담아서 return
     //public : 모두 공개하는 메서드

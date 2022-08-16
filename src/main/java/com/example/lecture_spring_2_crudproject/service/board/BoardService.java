@@ -1,6 +1,7 @@
 package com.example.lecture_spring_2_crudproject.service.board;
 
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
+import com.example.lecture_spring_2_crudproject.entity.board.Comments;
 
 import java.util.List;
 
@@ -14,4 +15,6 @@ public interface BoardService {
     void updateBoard(Board board);
 
     void deleteBoard(Board board);
+
+    void insertComment(Comments comments);
 }

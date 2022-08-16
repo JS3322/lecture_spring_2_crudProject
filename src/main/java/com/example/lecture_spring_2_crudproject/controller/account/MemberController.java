@@ -50,6 +50,10 @@ public class MemberController {
 
     @PostMapping("/updateAccount")
     public String updateAccount (Member member) {
+        System.out.println("--------------");
+        System.out.println(member.getSeq());
+        System.out.println(member.getId());
+        System.out.println(member.getEmail());
         memberService.updateMember(member);
         return "redirect:/account/getAccountList";
     }
@@ -100,6 +104,17 @@ public class MemberController {
         return "redirect:/account/getAccountList";
     }
 
+    @GetMapping("/selectAccount")
+    public String selectAccount() {
+        return "account/selectAccount";
+    }
+
+    @PostMapping("/selectAccount")
+    public String resultAccount(Member member, Model model) {
+        model.addAttribute("member",
+                memberService.getMemberWhereIdOrEmail(member.getEmail(), member.getId()));
+        return "account/resultAccount";
+    }
 }
 
 //@Controller
