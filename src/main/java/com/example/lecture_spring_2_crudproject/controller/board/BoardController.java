@@ -2,6 +2,7 @@ package com.example.lecture_spring_2_crudproject.controller.board;
 
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
+import com.example.lecture_spring_2_crudproject.service.account.MemberService;
 import com.example.lecture_spring_2_crudproject.service.board.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +24,12 @@ import java.util.List;
 @RequestMapping(path = "/board")
 public class BoardController {
 
+    private final BoardService boardService;
 
     @Autowired
-    private BoardService boardService;
+    protected BoardController(BoardService boardService) {
+        this.boardService = boardService;
+    }
 
     @PostMapping("/insertComment")
     public String insertCommnet(Comments comments, Model model) {
@@ -64,15 +68,18 @@ public class BoardController {
     @GetMapping("/getBoard")
     public String getBoard(Board board, Model model) {
         System.out.println("-------------------");
+        System.out.println(board.getSeq());
         model.addAttribute("board", boardService.getBoard(board));
         return "/board/getBoard";
     }
 
     @PostMapping ("/updateBoard")
     public String updateBoard(Board board) {
-        System.out.println("-------------------");
+        System.out.println("----------updateBoard---------");
+        System.out.println(board.getContent());
+        System.out.println(board.getSeq());
         boardService.updateBoard(board);
-        return "redirect:/board/getBoard?documentSrl="+board.getSeq();
+        return "redirect:/board/getBoard?seq="+board.getSeq();
     }
 
     @GetMapping("/updateBoard")
@@ -82,11 +89,11 @@ public class BoardController {
         return "/board/insertBoard";
     }
 
-    @Transactional
-    @PostMapping("/deleteBoard")
+    @GetMapping("/deleteBoard")
     public String deleteBoard(Board board) {
-        System.out.println("-------------------");
+        System.out.println("--------boarde delete-----------");
+        System.out.println(board.getSeq());
         boardService.deleteBoard(board);
-        return "redirect:/getBoardList";
+        return "redirect:/board/getBoardList";
     }
 }

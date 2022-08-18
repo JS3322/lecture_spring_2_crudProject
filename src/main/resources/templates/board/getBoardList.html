@@ -29,7 +29,7 @@
         [HTML(클라이언트)]seq=${board.seq} 에서 [JAVA(서버)]@RequestParam으로 매개변수 전달
         seq(변수명) = ${board.seq}(HTML(타임리프)에서의 데이터(클라이언트)
         -->
-        <td> <a th:href="@{board/getBoard(
+        <td> <a th:href="@{/board/getBoard(
                                 seq=${board.seq}
                                 )}"
                 th:text="${board.title}"></a></td>

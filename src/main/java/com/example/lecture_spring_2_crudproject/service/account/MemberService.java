@@ -21,4 +21,8 @@ public interface MemberService {
     void updateMember(Member member);
 
     void deleteMember(Member Member);
+
+    boolean searchUserYnUseEmail(Member member);
+    boolean searchUserYnUseId(Member member);
+    boolean searchUserYnUsePassword(Member member);
 }

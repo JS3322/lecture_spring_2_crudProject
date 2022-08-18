@@ -1,7 +1,9 @@
 package com.example.lecture_spring_2_crudproject.controller.account;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
+import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.service.account.MemberService;
+import com.example.lecture_spring_2_crudproject.service.account.MemberServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,12 +17,50 @@ import java.util.Date;
 //[디스페처 서블릿]이 컨트롤러를 찾기 위해서 @Controller라고 선언
 @Controller
 @RequestMapping(path = "/account")
-@RequiredArgsConstructor
 public class MemberController {
 
 
+    //MemberController 클래스가 실행되면 MemberService를 불러와서
+    // 주입 당하는 것
+    // @Autowired를 사용해서
+    //MemberController는 MemberService를 주입당하겠다고 선언
+    //Springboot는 인식 함 : MemberController가 실행할려면
+    //MemberService가 필요함
+    //장점1 : MemberController 실행되는 시점에서 필요한 객체만 실행할 수 있는 절약
+    //장점2 : 이미 컨테이너에 있는 객체를 활용하여 최대한 인스턴스(객체)를 최소한 사용
+    //아래 @Autowired는 필드 주입 방식
+    //메서드, 생성자, 필드 (객체의 데이터)
+    //필드 주입의 경우에는 2개이상 주입할시 어떤 게 먼저 주입당하는지를 모름
+    //주입 당하는 A와 B가 서로 주입당할 경우에는 어떤 게 먼저 생성할지 모르는 문제
+//    @Autowired
+//    private MemberService memberService;
+
+    //일반 자바라면, 실행하는 클래스 (main) 안에서 인스턴스를 만들어서
+    // 인스턴스 안에 있는 메서드를 실행 (Static : 불러옴)
+    //실행되는 클래스(main)이 먼저 존재하고 인스턴스르 후에 생성
+
+    //MemberService 라는 객체를 선언
+    //필드 주입방식은 @Autowired를 통해 컨테이너에서 주입당함 (할당)
+    //final은 변하지 않는 한 개 : MemberController는 안심하고
+    // MemberService사용
+    private final MemberService memberService;
+
+    //생성자 주입방식은 아래 생성자에 @Autowired를 붙혀서 컨테이너에서 주입 당함
+    //MemberController 클래스의 생성자를 선언
+    //매개변수를 MemberService로 받아서 위에 있는 필드값 MemberSerivce에 할당
+    //장점 : 객체 생성 시점에서 생성자를 통해서 주입 받기 때문에 순서 명확해집니다
     @Autowired
-    private MemberService memberService;
+    protected MemberController(MemberService memberService) {
+        this.memberService = memberService;
+    }
+
+//    private final MemberServiceImpl memberService;
+//
+//
+//    @Autowired
+//    protected MemberServiceImpl(MemberService memberService) {
+//        this.memberService = memberService;
+//    }
 
 
     //(클라이언트가 두 분류)게시판 : 사용자관점,

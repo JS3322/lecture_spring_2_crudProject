@@ -84,4 +84,19 @@ public class MemberServiceImpl implements MemberService {
     public void deleteMember(Member member) {
         memberRepo.deleteById(member.getSeq());
     }
+
+    @Override
+    public boolean searchUserYnUseEmail(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean searchUserYnUseId(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean searchUserYnUsePassword(Member member) {
+        return false;
+    }
 }
