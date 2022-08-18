@@ -65,10 +65,6 @@ public class MemberController {
         return "redirect:/account/getAccountList";
     }
 
-    //deleteAccount : 회원정보 삭제
-
-    //updateAaccount : 회원정보 수정
-
     //기존데이터의 무결성 체크를 위한 데이터전체 조회과 일부 수정작업 (sql 특정 컬럼의 값을 모두 gmail.com > naver.com)
     //+백업 entity
     //회원정보가 일정 수치까지 다다르르면(혹은 이벤트가 발생) updateAccountAll이라는 메서드를 통해
@@ -95,11 +91,6 @@ public class MemberController {
     @PostMapping("/insertAccount")
     public String insertAccountView(Member member) {
         //클라이언트에서 ID/PW
-        //createDate
-        //updateDate
-        member.setCreateDate(new Date());
-        member.setUpdateDate(new Date());
-
         memberService.insertMember(member);
         return "redirect:/account/getAccountList";
     }

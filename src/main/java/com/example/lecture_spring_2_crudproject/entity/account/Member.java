@@ -1,5 +1,6 @@
 package com.example.lecture_spring_2_crudproject.entity.account;
 
+import com.example.lecture_spring_2_crudproject.entity.base.BaseTimeEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -16,7 +17,7 @@ import java.util.Date;
 @Entity
 @Getter
 @Setter
-public class Member {
+public class Member extends BaseTimeEntity {
 
     //SELCT [*컬럼명=객체의 필드] FROM TABLE_NAME*객체;
     //CREATE TABLE (
@@ -36,11 +37,7 @@ public class Member {
 
     private String email;
 
-    @Temporal(TemporalType.DATE)
-    private Date createDate;
-
-    @Temporal(TemporalType.DATE)
-    private Date updateDate;
+    //deleteYn
 
 }
 

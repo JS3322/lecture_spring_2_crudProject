@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.transaction.Transactional;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,14 +43,20 @@ public class BoardController {
     }
 
     @GetMapping("/insertBoard")
-    public String insertBoardView() {
-        System.out.println("------inserBoard_get-------------");
-        return "/board/insetBoard";
+    public String insertBoard() {
+        System.out.println("------insertBoard_get-------------");
+        return "/board/insertBoard";
     }
 
     @PostMapping("/insertBoard")
     public String insertBoard(Board board) {
-        System.out.println("--------insertBoard_get-----------");
+        System.out.println("--------insertBoard_post-----------");
+        System.out.println(board.getCreateDate());
+        System.out.println(board.getUpdateDate());
+        board.setCreateDate(new Date());
+        board.setUpdateDate(new Date());
+        System.out.println(board.getCreateDate());
+        System.out.println(board.getUpdateDate());
         boardService.insertBoard(board);
         return "redirect:/board/getBoardList";
     }

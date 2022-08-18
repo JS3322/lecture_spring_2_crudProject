@@ -1,6 +1,7 @@
 package com.example.lecture_spring_2_crudproject.entity.board;
 
 
+import com.example.lecture_spring_2_crudproject.entity.base.BaseTimeEntity;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Getter
 @ToString
 @Entity
-public class Board {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue
@@ -30,14 +31,16 @@ public class Board {
     @ColumnDefault("'no content'")
     private String content;
 
-    @Temporal(TemporalType.DATE)
-    private Date createDate;
-
-    @Temporal(TemporalType.DATE)
-    private Date updateDate;
+//    @Temporal(TemporalType.DATE)
+//    private Date createDate;
+//
+//    @Temporal(TemporalType.DATE)
+//    private Date updateDate;
 
     @Setter
     @ColumnDefault("0")
     @Column(insertable = false, updatable = false)
     private Long cnt;
+
+    //deleteYn
 }
