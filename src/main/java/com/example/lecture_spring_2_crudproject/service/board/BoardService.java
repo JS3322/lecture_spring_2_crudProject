@@ -17,4 +17,13 @@ public interface BoardService {
     void deleteBoard(Board board);
 
     void insertComment(Comments comments);
+
+    //키워드분석
+    List<String> doNounsAnalysis(List<Board> boardlist);
+
+    //관련된 키워드 게시글 출력
+    List<Board> getAutoKeywordBoardList(List<String> keyword);
+
+    //오름차순으로 변경 (arrayList)
+    List<Board> getBoardListSortColumnByBoardList(List<Board> boardlist);
 }

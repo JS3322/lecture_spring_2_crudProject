@@ -86,17 +86,49 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public boolean searchUserYnUseEmail(Member member) {
+    public boolean booleanSearchUserByEmail(Member member) {
         return false;
     }
 
     @Override
-    public boolean searchUserYnUseId(Member member) {
+    public boolean booleanSearchUserById(Member member) {
         return false;
     }
 
     @Override
-    public boolean searchUserYnUsePassword(Member member) {
+    public boolean booleanSearchUserByPassword(Member member) {
         return false;
     }
+
+    @Override
+    public List<Member> getMemberListEmailSecurityStarByMemberList(List<Member> memberlist) {
+        return null;
+    }
+
+    @Override
+    public List<Member> getMemberListEncodingByMemberList(List<Member> memberlist) {
+        return null;
+    }
+
+    @Override
+    public List<Member> getBoardListAllBoardListByMemberId(Member member) {
+        return null;
+    }
+
+    @Override
+    public boolean booleanMemberIdEqualsBoardWriterByMember(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean booleanAfter30DaysChangePasswordByMemberUpdateDate(Member member) {
+        return false;
+    }
+
+    @Override
+    public boolean booleanChangedPassword3CheckByMemberPassword(Member member) {
+        return false;
+    }
+
+
 }

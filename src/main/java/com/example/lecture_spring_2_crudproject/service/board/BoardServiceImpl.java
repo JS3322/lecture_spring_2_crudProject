@@ -57,4 +57,19 @@ public class BoardServiceImpl implements BoardService{
         //insert comment 실행
         //트랜젝션 처리
     }
+
+    @Override
+    public List<String> doNounsAnalysis(List<Board> boardlist) {
+        return null;
+    }
+
+    @Override
+    public List<Board> getAutoKeywordBoardList(List<String> keyword) {
+        return null;
+    }
+
+    @Override
+    public List<Board> getBoardListSortColumnByBoardList(List<Board> boardlist) {
+        return null;
+    }
 }
