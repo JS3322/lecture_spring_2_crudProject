@@ -1,5 +1,6 @@
 package com.example.lecture_spring_2_crudproject.service.board;
 
+import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
 
@@ -18,8 +19,14 @@ public interface BoardService {
 
     void insertComment(Comments comments);
 
-    //키워드분석
-    List<String> doNounsAnalysis(List<Board> boardlist);
+    //board의 작성자와 회원이 같은지 확인 [2,5조...]
+    boolean booleanMemberIdEqualsBoardWriterByMember(Member member);
+
+    //작성자의 모든 게시글 출력
+    List<Board> getBoardListByMemberId(Member member);
+
+    //키워드분석 [4조]
+    List<String> doNounsAnalysis(List<Board> boardList);
 
     //관련된 키워드 게시글 출력
     List<Board> getAutoKeywordBoardList(List<String> keyword);

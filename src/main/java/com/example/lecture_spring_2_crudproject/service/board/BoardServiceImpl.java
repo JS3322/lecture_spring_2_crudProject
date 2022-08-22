@@ -1,5 +1,6 @@
 package com.example.lecture_spring_2_crudproject.service.board;
 
+import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
@@ -56,6 +57,19 @@ public class BoardServiceImpl implements BoardService{
         //boolean title 체크
         //insert comment 실행
         //트랜젝션 처리
+    }
+
+    @Override
+    public boolean booleanMemberIdEqualsBoardWriterByMember(Member member) {
+        return false;
+    }
+
+    @Override
+    public List<Board> getBoardListByMemberId(Member member) {
+        //Repository
+        System.out.println("------getBoardListByMemberId-----");
+        System.out.println(member.getId());
+        return boardRepo.findAllByMemberIdEqualsBoardWriter(member.getId());
     }
 
     @Override

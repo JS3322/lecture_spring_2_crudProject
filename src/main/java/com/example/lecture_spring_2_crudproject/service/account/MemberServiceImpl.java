@@ -2,6 +2,7 @@ package com.example.lecture_spring_2_crudproject.service.account;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
+import com.example.lecture_spring_2_crudproject.service.encrypt.EncryptAES256;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +13,15 @@ public class MemberServiceImpl implements MemberService {
 
     private final MemberRepository memberRepo;
 
+    private final EncryptAES256 encryptAES256;
+
     //순환참조 중단
     @Autowired
-    protected MemberServiceImpl(MemberRepository memberRepo) {
+    protected MemberServiceImpl(MemberRepository memberRepo, EncryptAES256 encryptAES256) {
+        this.encryptAES256 = encryptAES256;
         this.memberRepo = memberRepo;
     }
+
 
     //public : 공개
     //List<Member> : 리턴타입은 List 속성은 Member
@@ -101,23 +106,21 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<Member> getMemberListEmailSecurityStarByMemberList(List<Member> memberlist) {
+    public List<Member> getMemberListEmailSecurityStarByMemberList(List<Member> memberList) {
         return null;
     }
 
     @Override
-    public List<Member> getMemberListEncodingByMemberList(List<Member> memberlist) {
-        return null;
-    }
+    public List<Member> getMemberListEncodingByMemberList(List<Member> memberList) {
+        for(Member member : memberList) {
+            try {
+                member.setPassword(encryptAES256.encrypt(member.getPassword()));
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+        }
+        return memberList;
 
-    @Override
-    public List<Member> getBoardListAllBoardListByMemberId(Member member) {
-        return null;
-    }
-
-    @Override
-    public boolean booleanMemberIdEqualsBoardWriterByMember(Member member) {
-        return false;
     }
 
     @Override
