@@ -20,7 +20,7 @@ public class Comments extends BaseTimeEntity {
 
     private String Comments;
 
-    @ManyToOne
-    @JoinColumn(referencedColumnName = "title")
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @JoinColumn(referencedColumnName = "seq")
     private Board board;
 }

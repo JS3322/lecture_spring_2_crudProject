@@ -9,7 +9,10 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -18,7 +21,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Board extends BaseTimeEntity {
+public class Board extends BaseTimeEntity implements Serializable {
 
     @Id
     @GeneratedValue
@@ -43,6 +46,9 @@ public class Board extends BaseTimeEntity {
     @ManyToOne
     @JoinColumn(name = "id", referencedColumnName = "id")
     private Member member;
+
+    @OneToMany(mappedBy = "board")
+    private List<Comments> commentsList = new ArrayList<>();
 
 //    @Temporal(TemporalType.DATE)
 //    private Date createDate;
