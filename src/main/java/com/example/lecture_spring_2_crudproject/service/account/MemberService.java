@@ -2,6 +2,7 @@ package com.example.lecture_spring_2_crudproject.service.account;
 
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
+import com.example.lecture_spring_2_crudproject.entity.board.Board;
 
 import java.util.List;
 

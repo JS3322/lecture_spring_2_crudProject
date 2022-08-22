@@ -33,4 +33,7 @@ public interface BoardService {
 
     //오름차순으로 변경 (arrayList)
     List<Board> getBoardListSortColumnByBoardList(List<Board> boardlist);
+
+    //작성자의 모든 게시글 출력
+    List<Board> getBoardListAllBoardListByMemberId(Member member);
 }

@@ -115,4 +115,13 @@ public class BoardController {
         //return 페이지 Or controller mapoing
         return "/board/getBoardList";
     }
+
+    @GetMapping("/viewUserWriteBoard")
+    public String viewUserWriteBoard(Member member, Model model) {
+        System.out.println("-------view-------");
+        System.out.println(member.getId());
+        model.addAttribute("boardList",
+                boardService.getBoardListAllBoardListByMemberId(member));
+        return "/board/getBoardList";
+    }
 }

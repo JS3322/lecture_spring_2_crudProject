@@ -2,6 +2,7 @@ package com.example.lecture_spring_2_crudproject.repository.account;
 
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
+import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,4 +22,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     //(ID는 중복가능한 구조에서)Id값을 매개변수로 넣고, 아이디 생성날짜가 가장 최신인 것
     @Query(value = "select m from Member m where m.id = :id_1 order by m.createDate DESC")
     Member findFirstById(String id_1);
+
+
 }

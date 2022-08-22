@@ -42,8 +42,9 @@ public class MemberController {
     //MemberService 라는 객체를 선언
     //필드 주입방식은 @Autowired를 통해 컨테이너에서 주입당함 (할당)
     //final은 변하지 않는 한 개 : MemberController는 안심하고
-    // MemberService사용
+//     MemberService사용
     private final MemberService memberService;
+
 
     //생성자 주입방식은 아래 생성자에 @Autowired를 붙혀서 컨테이너에서 주입 당함
     //MemberController 클래스의 생성자를 선언
@@ -106,6 +107,8 @@ public class MemberController {
         memberService.deleteMember(member);
         return "redirect:/account/getAccountList";
     }
+
+
 
     //기존데이터의 무결성 체크를 위한 데이터전체 조회과 일부 수정작업 (sql 특정 컬럼의 값을 모두 gmail.com > naver.com)
     //+백업 entity

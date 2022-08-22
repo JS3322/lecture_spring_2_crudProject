@@ -73,6 +73,12 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
+    public List<Board> getBoardListAllBoardListByMemberId(Member member) {
+        return boardRepo.findAllByMemberIdEqualsBoardWriter(member.getId());
+    }
+
+
+    @Override
     public List<String> doNounsAnalysis(List<Board> boardlist) {
         return null;
     }
