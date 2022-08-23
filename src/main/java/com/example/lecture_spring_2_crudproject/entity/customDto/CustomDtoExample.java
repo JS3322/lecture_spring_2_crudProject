@@ -5,9 +5,11 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Value
+@Getter
+@Entity
 public class CustomDtoExample {
 
+    @Id
     private String input_id;
     private String input_writer;
     private String input_title;

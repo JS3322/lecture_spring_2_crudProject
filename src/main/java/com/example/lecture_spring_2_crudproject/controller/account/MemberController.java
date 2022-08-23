@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.Date;
+import java.util.List;
 
 //[디스페처 서블릿]이 컨트롤러를 찾기 위해서 @Controller라고 선언
 @Controller
@@ -97,7 +98,15 @@ public class MemberController {
         System.out.println("--------example select!!-----------");
         System.out.println(member.getId());
 
-        for(CustomDtoExample example : memberService.getCustomDtoByMemberId(member.getId())) {
+        List<CustomDtoExample> listCheck = memberService.getCustomDtoByMemberId(member.getId());
+
+        for(int i = 0; i< listCheck.size(); i++) {
+            System.out.println(listCheck.get(i).getInput_id());
+            System.out.println(listCheck.get(i).getInput_writer());
+            System.out.println(listCheck.get(i).getInput_title());
+        }
+
+        for(CustomDtoExample example : listCheck) {
             System.out.println(example.getInput_id());
             System.out.println(example.getInput_writer());
             System.out.println(example.getInput_title());

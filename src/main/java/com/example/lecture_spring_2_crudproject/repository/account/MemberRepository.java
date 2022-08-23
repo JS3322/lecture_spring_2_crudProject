@@ -27,7 +27,6 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "SELECT m FROM Member m JOIN fetch m.boardList WHERE m.id = :memberId")
     List<Member> findAllByMemberIdEqualsBoardWriter(String memberId);
 
-    @Query(value = "SELECT m.id as input_id, b.writer as input_writer, b.title as input_title from Member m inner join Board b on m.id = b.writer where m.id = :memberId", nativeQuery = true)
-    List<CustomDtoExample> findExample(String memberId);
+
 
 }

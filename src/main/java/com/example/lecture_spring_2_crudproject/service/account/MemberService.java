@@ -46,6 +46,6 @@ public interface MemberService {
 
     List<Member> getMemberListAndBoardListByMemberId(String memberId);
 
-    Iterable<CustomDtoExample> getCustomDtoByMemberId(String memberId);
+    List<CustomDtoExample> getCustomDtoByMemberId(String memberId);
 
 }
