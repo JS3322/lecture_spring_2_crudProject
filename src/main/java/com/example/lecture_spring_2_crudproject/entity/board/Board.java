@@ -43,7 +43,7 @@ public class Board extends BaseTimeEntity implements Serializable {
     //member를 필드에 선언
     //참조키가 어디인지 선언 (member 기본키가 board의 참조키로 기본적으로 할당)
     //board의 writer는 member의 id와 연관되어 있고, 참조키로 id로 연결되어 있다
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "id", referencedColumnName = "id")
     private Member member;
 

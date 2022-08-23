@@ -36,4 +36,6 @@ public interface BoardService {
 
     //작성자의 모든 게시글 출력
     List<Board> getBoardListAllBoardListByMemberId(Member member);
+
+    List<List<Object>> getBoardAndMemberUsersBoard();
 }

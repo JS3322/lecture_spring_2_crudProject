@@ -22,6 +22,10 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
     // (3)
     // WHERE m.id = :memberId //INNER조인한 튜플들의 결과물 중에 member.id가 매개변수 memberID와 동일한 조건을 걸겠다
     // (4)
+//    @Query(value = "SELECT b FROM Board b INNER JOIN Member m ON b.writer = m.id WHERE m.id = :memberId")
     @Query(value = "SELECT b FROM Board b INNER JOIN Member m ON b.writer = m.id WHERE m.id = :memberId")
     List<Board> findAllByMemberIdEqualsBoardWriter(String memberId);
+
+    @Query(value = "SELECT b FROM Board b JOIN b.member m")
+    List<List<Object>> findAllByBoardAndMember();
 }

@@ -3,6 +3,7 @@ package com.example.lecture_spring_2_crudproject.repository.account;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
+import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoExample;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -23,5 +24,10 @@ public interface MemberRepository extends JpaRepository<Member, Long> {
     @Query(value = "select m from Member m where m.id = :id_1 order by m.createDate DESC")
     Member findFirstById(String id_1);
 
+    @Query(value = "SELECT m FROM Member m JOIN fetch m.boardList WHERE m.id = :memberId")
+    List<Member> findAllByMemberIdEqualsBoardWriter(String memberId);
+
+    @Query(value = "SELECT m.id as input_id, b.writer as input_writer, b.title as input_title from Member m inner join Board b on m.id = b.writer where m.id = :memberId", nativeQuery = true)
+    List<CustomDtoExample> findExample(String memberId);
 
 }

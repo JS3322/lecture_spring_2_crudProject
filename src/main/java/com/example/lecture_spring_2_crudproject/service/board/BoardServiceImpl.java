@@ -89,7 +89,12 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public List<Board> getBoardListSortColumnByBoardList(List<Board> boardlist) {
+    public List<Board> getBoardListSortColumnByBoardList(List<Board> boardList) {
         return null;
+    }
+
+    @Override
+    public List<List<Object>> getBoardAndMemberUsersBoard() {
+        return boardRepo.findAllByBoardAndMember();
     }
 }

@@ -98,23 +98,6 @@ public class BoardController {
         return "redirect:/board/getBoardList";
     }
 
-    @GetMapping("/selectBoard")
-    public String selectBoard(Member member, Model model) {
-        System.out.println("--------boarde select-----------");
-        //board.getId()는 클라이언트에서 가져옴
-
-        //@Service에 board를 인자값으로 넣고 메서드 실행
-        model.addAttribute("boardList", boardService.getBoardListByMemberId(member));
-
-        //회원이 작성한 게시글리스트(List<Board>)
-        // > HTML에다가 뿌려주면 끝 (Controller에 가면 메서드가 실행되서 다른 결과물을 리턴받기 때문
-        // 어느 HTML로 가느냐? = 객체지향은 재활용성이 중요한 요인 중 하나
-        // HTML에 중에 재사용 할만한 것을 먼저 찾고, 그 후에 새로 만들기에 대해 고민
-        // > getBoardList
-
-        //return 페이지 Or controller mapoing
-        return "/board/getBoardList";
-    }
 
     @GetMapping("/viewUserWriteBoard")
     public String viewUserWriteBoard(Member member, Model model) {
@@ -123,5 +106,24 @@ public class BoardController {
         model.addAttribute("boardList",
                 boardService.getBoardListAllBoardListByMemberId(member));
         return "/board/getBoardList";
+    }
+
+    @GetMapping("/getAllUserBoardList")
+    public String AllUsersBoard(Model model) {
+
+//        List<Board> board = null;
+//        List<Member> member = null;
+
+//        for(List<Object> result : boardService.getBoardAndMemberUsersBoard()) {
+//            board = (List<Board>) result.get(0);
+//            member = (List<Member>) result.get(1);
+//        }
+
+        System.out.println(boardService.getBoardAndMemberUsersBoard().size());
+
+//            board = (List<Board>) boardService.getBoardAndMemberUsersBoard().get(0);
+//            member = (List<Member>) boardService.getBoardAndMemberUsersBoard().get(1);
+
+        return "index";
     }
 }

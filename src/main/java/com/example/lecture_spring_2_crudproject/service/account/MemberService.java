@@ -3,6 +3,8 @@ package com.example.lecture_spring_2_crudproject.service.account;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
+import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoExample;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -41,4 +43,9 @@ public interface MemberService {
 
     //비밀번호 변경 테이블 생성 후 변경한 기록을 남긴 뒤, 변경 내용 최신 3회 내용과 비교
     boolean booleanChangedPassword3CheckByMemberPassword(Member member);
+
+    List<Member> getMemberListAndBoardListByMemberId(String memberId);
+
+    Iterable<CustomDtoExample> getCustomDtoByMemberId(String memberId);
+
 }

@@ -1,6 +1,8 @@
 package com.example.lecture_spring_2_crudproject.service.account;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
+import com.example.lecture_spring_2_crudproject.entity.board.Board;
+import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoExample;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.service.encrypt.EncryptAES256;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -131,6 +133,16 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public boolean booleanChangedPassword3CheckByMemberPassword(Member member) {
         return false;
+    }
+
+    @Override
+    public List<Member> getMemberListAndBoardListByMemberId(String memberId) {
+        return memberRepo.findAllByMemberIdEqualsBoardWriter(memberId);
+    }
+
+    @Override
+    public Iterable<CustomDtoExample> getCustomDtoByMemberId(String memberId) {
+        return memberRepo.findExample(memberId);
     }
 
 
