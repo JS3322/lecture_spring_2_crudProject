@@ -112,7 +112,7 @@ import java.util.List;
 public class Member extends BaseTimeEntity implements Serializable {
 
     @Id
-    @GeneratedValue()
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long seq;
 
     @Column(length = 40, nullable = false, unique = true)
