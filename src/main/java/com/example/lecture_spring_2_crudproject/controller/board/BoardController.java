@@ -3,17 +3,17 @@ package com.example.lecture_spring_2_crudproject.controller.board;
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
-import com.example.lecture_spring_2_crudproject.service.account.MemberService;
+import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoSortPages;
 import com.example.lecture_spring_2_crudproject.service.board.BoardService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 
@@ -32,11 +32,32 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @PostMapping("/insertComment")
-    public String insertCommnet(Comments comments, Model model) {
+    @GetMapping("/insertComments")
+    public String insertComments(Board board, Model model) {
+        System.out.println(board.getTitle());
+        model.addAttribute("board", board);
+        return "/board/insertComments";
+    }
 
+    @PostMapping("/insertComments")
+    public String insertComments(@RequestParam("board_title")String boardTitle, Comments comments, Model model) {
+
+        System.out.println("------inertComments---------");
+        System.out.println(comments.getBoard_title());
+        System.out.println(comments.getComments_content());
         boardService.insertComment(comments);
         return "redirect:/board/getBoardList";
+    }
+
+    //board Seq전달하면 전체 comments를 불러오는 controller method
+    @GetMapping("/getCommentsList")
+    public String getCommentsList(Comments comments, Model model) {
+        System.out.println("-------getCommentsList-------");
+        System.out.println(comments.getBoard_title());
+        List<Comments> checkCommentsList = boardService.getAllComments(comments);
+
+        model.addAttribute("commentsList", checkCommentsList);
+        return "/board/getCommentsList";
     }
 
     @GetMapping("/getBoardList")
@@ -71,6 +92,7 @@ public class BoardController {
         System.out.println("-------------------");
         System.out.println(board.getSeq());
         model.addAttribute("board", boardService.getBoard(board));
+        model.addAttribute("boardPrv", boardService.getPagesSortIndex(board));
         return "/board/getBoard";
     }
 
@@ -125,5 +147,18 @@ public class BoardController {
 //            member = (List<Member>) boardService.getBoardAndMemberUsersBoard().get(1);
 
         return "index";
+    }
+
+    @GetMapping("sortTest")
+    public String sortTest(Board board, Model model) {
+
+        CustomDtoSortPages customDtoSortPages = boardService.getPagesSortIndex(board);
+        System.out.println(customDtoSortPages.getNEXT_SUBJECT());
+        System.out.println(customDtoSortPages.getNEXTID());
+        System.out.println(customDtoSortPages.getPREV_SUBJECT());
+        System.out.println(customDtoSortPages.getPREVID());
+
+//        model.addAttribute("sortBoard", customDtoSortPages);
+        return "/board/getBoardList";
     }
 }

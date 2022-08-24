@@ -5,8 +5,8 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Getter
 @Entity
+@Data
 public class CustomDtoExample {
 
     @Id

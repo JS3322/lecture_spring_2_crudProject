@@ -3,8 +3,11 @@ package com.example.lecture_spring_2_crudproject.service.board;
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
+import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoSortPages;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.repository.board.BoardRepository;
+import com.example.lecture_spring_2_crudproject.repository.board.CommentsRepository;
+import com.example.lecture_spring_2_crudproject.repository.customRepository.CustomDtoExampleRepositoryPred;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +18,17 @@ public class BoardServiceImpl implements BoardService{
 
 
     private final BoardRepository boardRepo;
+    private final CommentsRepository commentsRepository;
+    private final CustomDtoExampleRepositoryPred customDtoExampleRepositoryPred;
 
     //순환참조 중단
     @Autowired
-    protected BoardServiceImpl(BoardRepository boardRepo) {
+    protected BoardServiceImpl(BoardRepository boardRepo,
+                               CommentsRepository commentsRepository,
+                               CustomDtoExampleRepositoryPred customDtoExampleRepositoryPred
+    ) {
+        this.customDtoExampleRepositoryPred = customDtoExampleRepositoryPred;
+        this.commentsRepository = commentsRepository;
         this.boardRepo = boardRepo;
     }
 
@@ -54,6 +64,12 @@ public class BoardServiceImpl implements BoardService{
 
     @Override
     public void insertComment(Comments comments) {
+        System.out.println("------service logic---------");
+        System.out.println(comments.getBoard_title());
+        System.out.println(comments.getComments_content());
+        System.out.println(comments.getSeq());
+//        System.out.println(comments.getBoard().getTitle());
+        commentsRepository.save(comments);
         //boolean title 체크
         //insert comment 실행
         //트랜젝션 처리
@@ -96,5 +112,24 @@ public class BoardServiceImpl implements BoardService{
     @Override
     public List<List<Object>> getBoardAndMemberUsersBoard() {
         return boardRepo.findAllByBoardAndMember();
+    }
+
+    @Override
+    public List<Comments> getAllComments(Comments comments) {
+//        List<Comments> checktest = commentsRepository.findCommentsByBoard_seq(comments.getBoard_title());
+        List<Comments> checktest = commentsRepository.findAll();
+        System.out.println(checktest.size());
+        for(int i =0; i<checktest.size(); i++) {
+            System.out.println("-----init for-------");
+            checktest.get(i).getComments_content();
+        }
+        return checktest;
+    }
+
+    @Override
+    public CustomDtoSortPages getPagesSortIndex(Board board) {
+        CustomDtoSortPages customDtoSortPages = customDtoExampleRepositoryPred.findByPages(board.getSeq());
+        System.out.println(customDtoSortPages.getPREVID());
+        return customDtoSortPages;
     }
 }

@@ -144,7 +144,7 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
-    public List<CustomDtoExample> getCustomDtoByMemberId(String memberId) {
+    public CustomDtoExample getCustomDtoByMemberId(String memberId) {
         return customDtoExampleRepository.findExample(memberId);
     }
 

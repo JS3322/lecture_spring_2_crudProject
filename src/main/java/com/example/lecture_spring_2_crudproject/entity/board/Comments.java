@@ -1,26 +1,34 @@
 package com.example.lecture_spring_2_crudproject.entity.board;
 
+import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.base.BaseTimeEntity;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Getter
 @Entity
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
 public class Comments extends BaseTimeEntity {
 
-    //builder
-    //@Transient
-    //@NoArgsConstructor(AccessLevel.PROTECTED)
-
     @Id
+    @GeneratedValue
     private Long seq;
 
-    private String Comments;
+    private String comments_content;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
-    @JoinColumn(referencedColumnName = "seq")
+    @Transient
+    private String board_title;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_title" ,referencedColumnName = "title")
     private Board board;
+
+    public Comments(String comments_content, Board board) {
+        this.comments_content = comments_content;
+        this.board = board;
+    }
 }

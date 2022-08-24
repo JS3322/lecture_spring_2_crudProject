@@ -91,6 +91,7 @@ package com.example.lecture_spring_2_crudproject.entity.account;
 import com.example.lecture_spring_2_crudproject.entity.base.BaseTimeEntity;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -111,14 +112,19 @@ import java.util.List;
 public class Member extends BaseTimeEntity implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long seq;
 
     @Column(length = 40, nullable = false, unique = true)
     private String id;
 
+    @BatchSize(size=100)
     @OneToMany(mappedBy = "member")
     private List<Board> boardList = new ArrayList<>();
+
+//    @BatchSize(size=100)
+//    @OneToOne(mappedBy = "member")
+//    private Bu  = new ArrayList<>();
 
     private String password;
 
