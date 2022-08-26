@@ -97,16 +97,25 @@ public class MemberServiceImpl implements MemberService {
 
     @Override
     public boolean booleanSearchUserByEmail(Member member) {
+        for(Member member1 : memberRepo.findByEmailContaining(member.getEmail())) {
+            System.out.println(member1.getId());
+        }
         return false;
     }
 
     @Override
     public boolean booleanSearchUserById(Member member) {
+        for(Member member1 : memberRepo.findByIdContains(member.getId())) {
+            System.out.println(member1.getId());
+        }
         return false;
     }
 
     @Override
     public boolean booleanSearchUserByPassword(Member member) {
+        for(Member member1 : memberRepo.findByPasswordIsContaining(member.getPassword())) {
+            System.out.println(member1.getId());
+        }
         return false;
     }
 
