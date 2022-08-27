@@ -37,13 +37,13 @@ public class Board extends BaseTimeEntity implements Serializable {
     @JoinColumn(name = "id", referencedColumnName = "id")
     private Member member;
 
-    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
-    private List<Comments> commentsList = new ArrayList<>();
+//    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+//    private List<Comments> commentsList = new ArrayList<>();
 
-    public void addComments(Comments comments) {
-        comments.setBoard(this);
-        commentsList.add(comments);
-    }
+//    public void addComments(Comments comments) {
+//        comments.setBoard(this);
+//        commentsList.add(comments);
+//    }
 
     @Setter
     @Column(nullable = false)
