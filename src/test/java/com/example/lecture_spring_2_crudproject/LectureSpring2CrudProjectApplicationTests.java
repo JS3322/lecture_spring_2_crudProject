@@ -2,10 +2,10 @@ package com.example.lecture_spring_2_crudproject;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.account.User;
-import com.example.lecture_spring_2_crudproject.entity.board.Post;
+//import com.example.lecture_spring_2_crudproject.entity.board.Post;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.repository.account.UserRepository;
-import com.example.lecture_spring_2_crudproject.repository.board.PostRepository;
+//import com.example.lecture_spring_2_crudproject.repository.board.PostRepository;
 import com.example.lecture_spring_2_crudproject.service.openAPI.PublicAPI;
 import com.example.lecture_spring_2_crudproject.service.textTransfer.TextTransfer;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,8 +29,8 @@ class LectureSpring2CrudProjectApplicationTests {
     @Autowired
     UserRepository userRepository;
 
-    @Autowired
-    PostRepository postRepository;
+//    @Autowired
+//    PostRepository postRepository;
 
     @Test
     @DisplayName("저장, 데이터가 잘 들어갔는지 확인")
@@ -53,31 +53,31 @@ class LectureSpring2CrudProjectApplicationTests {
         publicAPI.testAPI();
     }
 
-    @Test
-    @BeforeEach
-    void setUp() {
-        userRepository.deleteAll();
-        postRepository.deleteAll();
-
-        System.out.println("==== setUp start ====");
-
-        for(int i = 0; i < 5; i++) {
-            User user = User.builder()
-                    .name("user" + i)
-                    .build();
-
-            userRepository.save(user);
-
-            Post post = Post.builder()
-                    .title("title" + i)
-                    .description("description" + i)
-                    .user(user)
-                    .build();
-
-            postRepository.save(post);
-        }
-        System.out.println("==== setUp end ====");
-
-    }
+//    @Test
+//    @BeforeEach
+//    void setUp() {
+//        userRepository.deleteAll();
+//        postRepository.deleteAll();
+//
+//        System.out.println("==== setUp start ====");
+//
+//        for(int i = 0; i < 5; i++) {
+//            User user = User.builder()
+//                    .name("user" + i)
+//                    .build();
+//
+//            userRepository.save(user);
+//
+//            Post post = Post.builder()
+//                    .title("title" + i)
+//                    .description("description" + i)
+//                    .user(user)
+//                    .build();
+//
+//            postRepository.save(post);
+//        }
+//        System.out.println("==== setUp end ====");
+//
+//    }
 
 }
