@@ -6,6 +6,9 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
 import org.springframework.stereotype.Service;
 //import org.json.simple.JSONArray;
 //import org.json.simple.JSONObject;
@@ -14,7 +17,20 @@ import org.springframework.stereotype.Service;
 @Service
 public class PublicAPI {
 
-    void testAPI() {
+    public void testAPI() {
+        String result = readAPI();
+
+//        String jsonStr = gson.toJson(result);
+//        System.out.println(jsonStr);
+
+        Gson pretty = new GsonBuilder().setPrettyPrinting().create();
+        String element = pretty.toJson(result);
+
+        System.out.println(element);
+
+    }
+
+    public String readAPI() {
         String key = "%2Fk49W4UhNTuGlvyhZ6NCaHVhV1%2BBp0wbhWy0YjmvKgHQSFbVPwQqzw4ppSYg8O9ubHyLPYi8N%2F0e4yGvEQKGug%3D%3D";
 
         // 파싱한 데이터를 저장할 변수
@@ -24,15 +40,18 @@ public class PublicAPI {
 
         try {
 
-            URL url = new URL("https://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey="
+            URL url = new URL("http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey="
                     + key + "&numOfRows=10&pageNo=1&area=1&type=json");
 
 //            BufferedReader bf;
 //            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
 //            bfResult = bf.readLine();
+//
+//            System.out.println(bfResult.length());
 
             HttpURLConnection con =(HttpURLConnection)url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
+
 
             while((brResult=br.readLine())!=null) {
                 sb.append(brResult);
@@ -40,8 +59,14 @@ public class PublicAPI {
             }
             br.close();
             con.disconnect();
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
 
-            Gson gson=new Gson();
+        return sb.toString();
+
+
+
 //            AirLineList flightInfo=gson.fromJson(sb.toString(), AirLineList.class);
 
 //            JSONParser jsonParser = new JSONParser();
@@ -67,9 +92,5 @@ public class PublicAPI {
 //            System.out.println("영화유형 : " + movieInfo.get("typeNm"));
 //            System.out.println("제작국가명 : " + nations_nationNm.get("nationNm"));
 
-
-        }catch(Exception e) {
-            e.printStackTrace();
-        }
     }
 }
