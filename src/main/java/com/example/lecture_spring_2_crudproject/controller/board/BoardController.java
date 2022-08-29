@@ -39,6 +39,12 @@ public class BoardController {
         return "/board/insertComments";
     }
 
+    @GetMapping("/music")
+    public String getMusicPage(Model model) {
+
+        return "/board/music";
+    }
+
     @PostMapping("/insertComments")
     public String insertComments(@RequestParam("board_title")String boardTitle, Comments comments, Model model) {
 
