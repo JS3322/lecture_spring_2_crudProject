@@ -20,6 +20,9 @@ public class PublicAPI {
 
         String result = readAPI();
 
+        //jacson : 빅데이터 등 큰 사이즈의 json 처리
+        //gson : 분산 아키텍처 설정 등 작은 용량의 json
+        //simplejson : 골고루 빠름
 
         //Gson tranfer
         Gson pretty = new GsonBuilder().setPrettyPrinting().create();

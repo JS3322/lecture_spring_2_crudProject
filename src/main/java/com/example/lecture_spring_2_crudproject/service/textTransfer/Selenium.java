@@ -23,19 +23,26 @@ public class Selenium {
 
     private String base_url;
 
+    //Jsoup
+    // http request사용하여 정적 데이터 수집
+    //selenium
+    //jsoup에 속도는 느리나 드라이버를 사용해 동적데이터 수집 가능
+
     public void scraping() {
 
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
+//        ChromeOptions options = new ChromeOptions();
         driver = new ChromeDriver();
-        base_url = "https://www.fragrantica.com/perfume/Maison-Francis-Kurkdjian/Baccarat-Rouge-540-33519.html";
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(50000));
+//        base_url = "https://www.fragrantica.com/perfume/Maison-Francis-Kurkdjian/Baccarat-Rouge-540-33519.html";
+        base_url = "https://giraf.sktelecom.com/web/kostat/";
+        driver.get(base_url);
 
         try{
-            driver.get(base_url);
-            driver.manage().timeouts().implicitlyWait(Duration.ofMillis(50000));
-
+            Thread.sleep(5000);
             System.out.println(driver.getPageSource());
+
+            WebElement searchBtn = driver.findElement(By.id("search_btn"));
 
 //            WebElement textBox = driver.findElement(By.name("my-text"));
 //            WebElement submitButton = driver.findElement(By.cssSelector("button"));
