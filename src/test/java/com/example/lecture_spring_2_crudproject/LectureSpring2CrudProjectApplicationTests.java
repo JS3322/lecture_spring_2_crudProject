@@ -3,6 +3,7 @@ package com.example.lecture_spring_2_crudproject;
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.service.openAPI.PublicAPI;
+import com.example.lecture_spring_2_crudproject.service.textTransfer.Selenium;
 import com.example.lecture_spring_2_crudproject.service.textTransfer.TextTransfer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,8 @@ class LectureSpring2CrudProjectApplicationTests {
 
 
 
+    @Autowired
+    Selenium selenium;
     @Autowired
     TextTransfer textTransfer;
 
@@ -48,6 +51,10 @@ class LectureSpring2CrudProjectApplicationTests {
         textTransfer.transferText3Word("abcdefg@gmil.com");
     }
 
+    @Test
+    void Scraping() {
+        selenium.scraping();
+    }
 
 
 
