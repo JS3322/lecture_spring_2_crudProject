@@ -4,11 +4,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import org.springframework.stereotype.Service;
 //import org.json.simple.JSONArray;
 //import org.json.simple.JSONObject;
@@ -18,15 +17,21 @@ import org.springframework.stereotype.Service;
 public class PublicAPI {
 
     public void testAPI() {
+
         String result = readAPI();
 
-//        String jsonStr = gson.toJson(result);
-//        System.out.println(jsonStr);
 
+        //Gson tranfer
         Gson pretty = new GsonBuilder().setPrettyPrinting().create();
         String element = pretty.toJson(result);
-
+        System.out.println("----------testAPI-----------");
         System.out.println(element);
+
+        BusDTO busdto = pretty.fromJson(result, BusDTO.class);
+        for(int i =0; i<busdto.getResponse().getBody().getNumOfRows(); i++) {
+            System.out.println(busdto.getResponse().getBody().getItems().get(i).getCpname());
+        }
+
 
     }
 
@@ -41,13 +46,7 @@ public class PublicAPI {
         try {
 
             URL url = new URL("http://apis.data.go.kr/B551177/BusInformation/getBusInfo?serviceKey="
-                    + key + "&numOfRows=10&pageNo=1&area=1&type=json");
-
-//            BufferedReader bf;
-//            bf = new BufferedReader(new InputStreamReader(url.openStream(), "UTF-8"));
-//            bfResult = bf.readLine();
-//
-//            System.out.println(bfResult.length());
+                    + key + "&numOfRows=2&pageNo=1&area=1&type=json");
 
             HttpURLConnection con =(HttpURLConnection)url.openConnection();
             BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(),"UTF-8"));
@@ -64,33 +63,6 @@ public class PublicAPI {
         }
 
         return sb.toString();
-
-
-
-//            AirLineList flightInfo=gson.fromJson(sb.toString(), AirLineList.class);
-
-//            JSONParser jsonParser = new JSONParser();
-//            JSONObject jsonObject = (JSONObject)jsonParser.parse(result);
-//            JSONObject movieInfoResult = (JSONObject)jsonObject.get("movieInfoResult");
-//            JSONObject movieInfo = (JSONObject)movieInfoResult.get("movieInfo");
-//
-//            JSONArray nations = (JSONArray)movieInfo.get("nations");
-//            JSONObject nations_nationNm = (JSONObject)nations.get(0);
-//
-//            JSONArray directors = (JSONArray)movieInfo.get("directors");
-//            JSONObject directors_peopleNm = (JSONObject)directors.get(0);
-//
-//            JSONArray genres = (JSONArray)movieInfo.get("genres");
-//
-//            JSONArray actors = (JSONArray)movieInfo.get("actors");
-//
-//            System.out.println("영화코드 : " + movieInfo.get("movieCd"));
-//            System.out.println("영화명(한글) : " + movieInfo.get("movieNm"));
-//            System.out.println("영화명(영문) : " + movieInfo.get("movieNmEn"));
-//            System.out.println("재생시간 : " + movieInfo.get("showTm"));
-//            System.out.println("개봉일 : " + movieInfo.get("openDt"));
-//            System.out.println("영화유형 : " + movieInfo.get("typeNm"));
-//            System.out.println("제작국가명 : " + nations_nationNm.get("nationNm"));
 
     }
 }

@@ -1,11 +1,7 @@
 package com.example.lecture_spring_2_crudproject;
 
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
-import com.example.lecture_spring_2_crudproject.entity.account.User;
-//import com.example.lecture_spring_2_crudproject.entity.board.Post;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
-import com.example.lecture_spring_2_crudproject.repository.account.UserRepository;
-//import com.example.lecture_spring_2_crudproject.repository.board.PostRepository;
 import com.example.lecture_spring_2_crudproject.service.openAPI.PublicAPI;
 import com.example.lecture_spring_2_crudproject.service.textTransfer.TextTransfer;
 import org.junit.jupiter.api.BeforeEach;
@@ -17,29 +13,33 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class LectureSpring2CrudProjectApplicationTests {
 
+
+
+
     @Autowired
     TextTransfer textTransfer;
 
     @Autowired
     PublicAPI publicAPI;
 
+    @Test
+    void apiTest() {
+        publicAPI.testAPI();
+    }
+
     @Autowired
     MemberRepository memberRepository;
-
-    @Autowired
-    UserRepository userRepository;
-
-//    @Autowired
-//    PostRepository postRepository;
 
     @Test
     @DisplayName("저장, 데이터가 잘 들어갔는지 확인")
     void contextSave() {
         //Setter로 엔티티를 생성하고 repositoy가 정상 작동하는지 확인
         Member member = new Member();
-        member.setId("1kim");
-        member.setPassword("1kim123");
-        member.setEmail("1kim@123");
+        //클라이언트에서 controller에 데이터를 전달하는 내용을 setter를 통해 대체
+        member.setId("humanClass4");
+        member.setPassword("12341234@");
+        member.setEmail("class4@123.com");
+        //memberRepository의 save메서드가 정상 동작하는지 확인
         memberRepository.save(member);
     }
 
@@ -48,36 +48,7 @@ class LectureSpring2CrudProjectApplicationTests {
         textTransfer.transferText3Word("abcdefg@gmil.com");
     }
 
-    @Test
-    void apiTest() {
-        publicAPI.testAPI();
-    }
 
-//    @Test
-//    @BeforeEach
-//    void setUp() {
-//        userRepository.deleteAll();
-//        postRepository.deleteAll();
-//
-//        System.out.println("==== setUp start ====");
-//
-//        for(int i = 0; i < 5; i++) {
-//            User user = User.builder()
-//                    .name("user" + i)
-//                    .build();
-//
-//            userRepository.save(user);
-//
-//            Post post = Post.builder()
-//                    .title("title" + i)
-//                    .description("description" + i)
-//                    .user(user)
-//                    .build();
-//
-//            postRepository.save(post);
-//        }
-//        System.out.println("==== setUp end ====");
-//
-//    }
+
 
 }
