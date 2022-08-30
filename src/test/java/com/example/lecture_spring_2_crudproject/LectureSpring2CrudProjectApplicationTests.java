@@ -4,6 +4,7 @@ import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.repository.account.MemberRepository;
 import com.example.lecture_spring_2_crudproject.service.openAPI.PublicAPI;
 import com.example.lecture_spring_2_crudproject.service.textTransfer.Selenium;
+import com.example.lecture_spring_2_crudproject.service.textTransfer.SeleniumExample;
 import com.example.lecture_spring_2_crudproject.service.textTransfer.TextTransfer;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -16,6 +17,8 @@ class LectureSpring2CrudProjectApplicationTests {
 
 
 
+    @Autowired
+    SeleniumExample seleniumExample;
 
     @Autowired
     Selenium selenium;
@@ -54,6 +57,11 @@ class LectureSpring2CrudProjectApplicationTests {
     @Test
     void Scraping() {
         selenium.scraping();
+    }
+
+    @Test
+    void ScrapingTest() {
+        seleniumExample.scraping();
     }
 
 
