@@ -3,25 +3,44 @@ package com.example.lecture_spring_2_crudproject.controller.board;
 import com.example.lecture_spring_2_crudproject.entity.account.Member;
 import com.example.lecture_spring_2_crudproject.entity.board.Board;
 import com.example.lecture_spring_2_crudproject.entity.board.Comments;
+import com.example.lecture_spring_2_crudproject.entity.board.FileEntity;
 import com.example.lecture_spring_2_crudproject.entity.customDto.CustomDtoSortPages;
 import com.example.lecture_spring_2_crudproject.service.board.BoardService;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.http.HttpHeaders;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+
+import static com.google.common.io.ByteStreams.toByteArray;
+import static org.apache.tomcat.util.http.fileupload.IOUtils.*;
 
 /**
  * @description : 게시판 컨트롤러
  **/
 
 @Controller
+@Slf4j
 @RequestMapping(path = "/board")
 public class BoardController {
 
@@ -155,7 +174,7 @@ public class BoardController {
         return "index";
     }
 
-    @GetMapping("sortTest")
+    @GetMapping("/sortTest")
     public String sortTest(Board board, Model model) {
 
         CustomDtoSortPages customDtoSortPages = boardService.getPagesSortIndex(board);
@@ -167,4 +186,47 @@ public class BoardController {
 //        model.addAttribute("sortBoard", customDtoSortPages);
         return "/board/getBoardList";
     }
+
+//    application/x-www-form-urlencoded
+//    multipart/form-data
+    @PostMapping("/updateImage")
+    public String updateImage(@RequestParam("uploadfile")MultipartFile[] uploadfile, Model model) throws IOException {
+        log.info("dawda");
+        List<FileEntity> list = new ArrayList<>();
+        for(MultipartFile file : uploadfile) {
+            if(!file.isEmpty()) {
+                FileEntity dto = new FileEntity(null, UUID.randomUUID().toString(), file.getContentType(), file.getName(),file.getOriginalFilename());
+                list.add(dto);
+                File newFileName = new File(dto.getUuid()+"_"+dto.getName()+".png");
+                file.transferTo(newFileName);
+            }
+        }
+        return "/board/getBoardList";
+    }
+
+    @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
+    public ResponseEntity<byte[]> userSearch(@PathVariable("imagename") String imagename) throws IOException {
+        InputStream imageStream = new FileInputStream("/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/upload/" + imagename);
+        byte[] imageByteArray = toByteArray(imageStream);
+        imageStream.close();
+        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+    }
+
+//    @GetMapping("/display")
+//    public ResponseEntity<Resource> display(@RequestParam("filename") String filename) {
+//        String path = "C:\\Temp\\upload\\";
+//        String folder = "";
+//        Resource resource = new FileSystemResource(path + folder + filename);
+//        if(!resource.exists())
+//            return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+//        HttpHeaders header = new HttpHeaders();
+//        Path filePath = null;
+//        try{
+//            filePath = Paths.get(path + folder + filename);
+//            header.add("Content-type", Files.probeContentType(filePath));
+//        }catch(IOException e) {
+//            e.printStackTrace();
+//        }
+//        return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
+
 }
