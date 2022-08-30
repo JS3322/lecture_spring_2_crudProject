@@ -59,6 +59,8 @@ public class MemberServiceImpl implements MemberService {
         memberRepo.save(member);
     }
 
+
+
     @Override
     public Member getMember(Member member) {
         return memberRepo.findById(member.getSeq()).get();

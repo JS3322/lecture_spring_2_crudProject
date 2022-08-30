@@ -27,6 +27,7 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+    //Selenium
     implementation 'org.seleniumhq.selenium:selenium-java'
 
     //Gson 라이브러리
