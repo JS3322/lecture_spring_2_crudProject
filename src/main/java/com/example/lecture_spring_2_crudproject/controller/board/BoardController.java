@@ -199,6 +199,12 @@ public class BoardController {
                 list.add(dto);
                 File newFileName = new File(dto.getUuid()+"_"+dto.getName()+".png");
                 file.transferTo(newFileName);
+
+                //이미지 사이즈 변경
+//                boolean isConvert = ImageUtils.converFmt();
+//                if(isConvert) {
+//                    ImageUtils.resizeImage(newFileName.getPath(), 60, 60);
+//                }
             }
         }
         return "/board/getBoardList";
