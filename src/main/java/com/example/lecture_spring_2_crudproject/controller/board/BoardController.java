@@ -184,26 +184,26 @@ public class BoardController {
 
 //    application/x-www-form-urlencoded
 //    multipart/form-data
-    @PostMapping("/updateImage")
-    public String updateImage(@RequestParam("uploadfile")MultipartFile[] uploadfile, Model model) throws IOException {
-        log.info("dawda");
-        List<FileEntity> list = new ArrayList<>();
-        for(MultipartFile file : uploadfile) {
-            if(!file.isEmpty()) {
-                FileEntity dto = new FileEntity(null, UUID.randomUUID().toString(), file.getContentType(), file.getName(),file.getOriginalFilename());
-                list.add(dto);
-                File newFileName = new File(dto.getUuid()+"_"+dto.getName()+".png");
-                file.transferTo(newFileName);
-
-                //이미지 사이즈 변경
-//                boolean isConvert = ImageUtils.converFmt();
-//                if(isConvert) {
-//                    ImageUtils.resizeImage(newFileName.getPath(), 60, 60);
-//                }
-            }
-        }
-        return "/board/getBoardList";
-    }
+//    @PostMapping("/updateImage")
+//    public String updateImage(@RequestParam("uploadfile")MultipartFile[] uploadfile, Model model) throws IOException {
+//        log.info("dawda");
+//        List<FileEntity> list = new ArrayList<>();
+//        for(MultipartFile file : uploadfile) {
+//            if(!file.isEmpty()) {
+//                FileEntity dto = new FileEntity(null, UUID.randomUUID().toString(), file.getContentType(), file.getName(),file.getOriginalFilename());
+//                list.add(dto);
+//                File newFileName = new File(dto.getUuid()+"_"+dto.getName()+".png");
+//                file.transferTo(newFileName);
+//
+//                //이미지 사이즈 변경
+////                boolean isConvert = ImageUtils.converFmt();
+////                if(isConvert) {
+////                    ImageUtils.resizeImage(newFileName.getPath(), 60, 60);
+////                }
+//            }
+//        }
+//        return "/board/getBoardList";
+//    }
 
     //*client에서 server로 이미지파일 전송(데이터 전송)
     //html form태그에 upload버튼으로 이미지 데이터 전송(MultipartFile) > Entity기준으로 데이터 정보를 전달
