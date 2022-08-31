@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+
 @Getter
 public class BusDTO{
     private Response response;
@@ -36,6 +37,7 @@ class Body {
     private int pageNo;
     private int totalCount;
     private List<Items> items;
+//    private Items_1 items_1;
 }
 
 @Getter

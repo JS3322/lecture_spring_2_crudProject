@@ -24,12 +24,17 @@ public class PublicAPI {
         //gson : 분산 아키텍처 설정 등 작은 용량의 json
         //simplejson : 골고루 빠름
 
+        //json방식은 http 프로토콜을 통해서 데이터 전송규약 (클라이언트와 백엔드 통신)
+        //백엔드와 백엔드 통신도 json방식 > grpc 통신의 등장으로 다수의 백엔드 통신은 grpc 변경. (앱통신도 grpc)
+
         //Gson tranfer
         Gson pretty = new GsonBuilder().setPrettyPrinting().create();
         String element = pretty.toJson(result);
         System.out.println("----------testAPI-----------");
         System.out.println(element);
 
+        //String 문자열을 dto 객체로 변환
+        //fromJson(문자열, DTO객체.class(런타임시점 객체))
         BusDTO busdto = pretty.fromJson(result, BusDTO.class);
         for(int i =0; i<busdto.getResponse().getBody().getNumOfRows(); i++) {
             System.out.println(busdto.getResponse().getBody().getItems().get(i).getCpname());
@@ -59,6 +64,7 @@ public class PublicAPI {
                 sb.append(brResult);
                 System.out.println(brResult);
             }
+            //자원 반환
             br.close();
             con.disconnect();
         }catch(Exception e) {
