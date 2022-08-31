@@ -260,8 +260,23 @@ public class BoardController {
 //        inputStream.close();
 
         FileInputStream fis = new FileInputStream(path); // 원본 파일 명
+        //경로가 가르키는 파일을 바이트 스트림으로 읽기
+//        int read = 0;
+//        while((read= fis.read())!=-1) {
+//            log.info(String.valueOf(read));
+//        }
+
         BufferedInputStream bis = new BufferedInputStream(fis);
+        //바이트 단위로 파일을 읽어오는 버퍼 스트림으로 가져오기
+
         byte[] imgByteArr = bis.readAllBytes();
+        for(int i = 0; i<imgByteArr.length; i++ ) {
+            if(i==20) {
+//                log.info(imgByteArr.);
+            }
+
+        }
+//        log.debug(imgByteArr.toString());
         //ResponseEntity를 통해 http프로토콜로 클라이언트에게 데이터 전송
         return new ResponseEntity<byte[]>(imgByteArr, HttpStatus.OK);
     }
@@ -270,14 +285,14 @@ public class BoardController {
 
 
 
-
-    @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
-    public ResponseEntity<byte[]> imageSearch(@PathVariable("imagename") String imagename) throws IOException {
-        InputStream imageStream = new FileInputStream("/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/upload/" + imagename);
-        byte[] imageByteArray = toByteArray(imageStream);
-        imageStream.close();
-        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
-    }
+//
+//    @GetMapping(value = "/image/{imagename}", produces = MediaType.IMAGE_JPEG_VALUE)
+//    public ResponseEntity<byte[]> imageSearch(@PathVariable("imagename") String imagename) throws IOException {
+//        InputStream imageStream = new FileInputStream("/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/upload/" + imagename);
+//        byte[] imageByteArray = toByteArray(imageStream);
+//        imageStream.close();
+//        return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+//    }
 
     @GetMapping(value = "/image/{imagename}/filer", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> imagefilter(@PathVariable("imagename") String imagename) throws IOException {
