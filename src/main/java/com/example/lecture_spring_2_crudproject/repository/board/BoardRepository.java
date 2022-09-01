@@ -28,4 +28,6 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 
     @Query(value = "SELECT b FROM Board b JOIN b.member m")
     List<List<Object>> findAllByBoardAndMember();
+
+
 }
