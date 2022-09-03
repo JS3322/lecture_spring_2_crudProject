@@ -28,6 +28,7 @@ class LectureSpring2CrudProjectApplicationTests {
     @Autowired
     PublicAPI publicAPI;
 
+    //API 받아오기 테스트
     @Test
     void apiTest() {
         publicAPI.testAPI();
@@ -49,16 +50,18 @@ class LectureSpring2CrudProjectApplicationTests {
         memberRepository.save(member);
     }
 
+    //substring과 split
     @Test
     void textTest() throws Exception {
         textTransfer.transferText3Word("abcdefg@gmil.com");
     }
 
     @Test
-    void Scraping() {
+    void Scraping_win() {
         selenium.scraping();
     }
 
+    //스크래핑 테스트
     @Test
     void ScrapingTest() {
         seleniumExample.scraping();
