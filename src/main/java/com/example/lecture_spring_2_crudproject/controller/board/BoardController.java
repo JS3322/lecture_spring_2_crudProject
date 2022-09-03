@@ -133,8 +133,12 @@ public class BoardController {
     @GetMapping("/getBoard")
     public String getBoard(Board board, Model model) {
 
-        FileUploadEntity fileUploadEntity = boardService.getFileUploadEntity2(board.getSeq());
-        String path = "/board/image/"+fileUploadEntity.getUuid()+"_"+fileUploadEntity.getOriginalFilename();
+        List<FileUploadEntity> fileUploadEntity = boardService.getFileUploadEntity2(board.getSeq());
+        List<String> path = new ArrayList<>();
+        for (FileUploadEntity fe : fileUploadEntity) {
+            String savePath = "/board/image/"+fe.getUuid()+"_"+fe.getOriginalFilename();
+            path.add(savePath);
+        }
 
         model.addAttribute("board", boardService.getBoard(board));
         model.addAttribute("boardPrv", boardService.getPagesSortIndex(board));
@@ -242,7 +246,7 @@ public class BoardController {
     //단점 : DB에 많은 부하가 걸림, 데이터 저장 포맷의 한계. (oracle 기준으로 Blob 단위로 저장할 때 4gb한계에 이슈)
     @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("uploadfile")MultipartFile[] uploadfile,
-                             @RequestParam("writer")String input_writer) throws IOException {
+                             @RequestParam("seq")Long input_seq) throws IOException {
         //@RequestParam("writer") = 클라이언트 html의 input tag의 name(key값)인 writer를 controller에서 받아옴
         //매개변수 String input_writer로 전달
 //        log.info(input_writer);
@@ -265,7 +269,7 @@ public class BoardController {
                         file.getContentType(),
                         file.getName(),
                         file.getOriginalFilename(),
-                        20L
+                        input_seq
                         );
                 Long output = boardService.insertFileUploadEntity(entity);
                 log.info("seq check!");
@@ -284,41 +288,41 @@ public class BoardController {
     //server에서 client로 이미지 전송
     //springboot에서 URL주소를 통해 이미지를 받음, InputStream을 통해 파일을 http프로토콜에 전달하여 클라이언트에게 전송
 
-    @GetMapping("/viewImage/{seq}")
-    public ResponseEntity<byte[]> viewImage(@PathVariable("seq")String board_seq) throws IOException {
-
-        FileUploadEntity fileUploadEntity = boardService.getFileUploadEntity(board_seq);
-        //ResponseEntity<byte[]> : http프로토콜을 통해서 byte데이터를 전달하는 객체, byte(소문자=기본타입) []배열
-        //@PathVariable : URL주소의 값을 받아옴
-        String path = "/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/upload/"+fileUploadEntity.getUuid()+"_"+fileUploadEntity.getOriginalFilename();
-        log.info(path);
-        //데이터(이미지)를 전송하기 위한 객체로써 java에서는 항상 데이터를 스트림타입으로 전달
-//        InputStream inputStream = new FileInputStream(path);
-//        //byte배열로 변환
-//        byte[] imgByteArr = toByteArray(inputStream);
-//        inputStream.close();
-
-        FileInputStream fis = new FileInputStream(path); // 원본 파일 명
-        //경로가 가르키는 파일을 바이트 스트림으로 읽기
-//        int read = 0;
-//        while((read= fis.read())!=-1) {
-//            log.info(String.valueOf(read));
+//    @GetMapping("/viewImage/{seq}")
+//    public ResponseEntity<byte[]> viewImage(@PathVariable("seq")String board_seq) throws IOException {
+//
+//        List<FileUploadEntity> fileUploadEntity = boardService.getFileUploadEntity(board_seq);
+//        //ResponseEntity<byte[]> : http프로토콜을 통해서 byte데이터를 전달하는 객체, byte(소문자=기본타입) []배열
+//        //@PathVariable : URL주소의 값을 받아옴
+//        String path = "/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/upload/"+fileUploadEntity.getUuid()+"_"+fileUploadEntity.getOriginalFilename();
+//        log.info(path);
+//        //데이터(이미지)를 전송하기 위한 객체로써 java에서는 항상 데이터를 스트림타입으로 전달
+////        InputStream inputStream = new FileInputStream(path);
+////        //byte배열로 변환
+////        byte[] imgByteArr = toByteArray(inputStream);
+////        inputStream.close();
+//
+//        FileInputStream fis = new FileInputStream(path); // 원본 파일 명
+//        //경로가 가르키는 파일을 바이트 스트림으로 읽기
+////        int read = 0;
+////        while((read= fis.read())!=-1) {
+////            log.info(String.valueOf(read));
+////        }
+//
+//        BufferedInputStream bis = new BufferedInputStream(fis);
+//        //바이트 단위로 파일을 읽어오는 버퍼 스트림으로 가져오기
+//
+//        byte[] imgByteArr = bis.readAllBytes();
+//        for(int i = 0; i<imgByteArr.length; i++ ) {
+//            if(i==20) {
+////                log.info(imgByteArr.);
+//            }
+//
 //        }
-
-        BufferedInputStream bis = new BufferedInputStream(fis);
-        //바이트 단위로 파일을 읽어오는 버퍼 스트림으로 가져오기
-
-        byte[] imgByteArr = bis.readAllBytes();
-        for(int i = 0; i<imgByteArr.length; i++ ) {
-            if(i==20) {
-//                log.info(imgByteArr.);
-            }
-
-        }
-//        log.debug(imgByteArr.toString());
-        //ResponseEntity를 통해 http프로토콜로 클라이언트에게 데이터 전송
-        return new ResponseEntity<byte[]>(imgByteArr, HttpStatus.OK);
-    }
+////        log.debug(imgByteArr.toString());
+//        //ResponseEntity를 통해 http프로토콜로 클라이언트에게 데이터 전송
+//        return new ResponseEntity<byte[]>(imgByteArr, HttpStatus.OK);
+//    }
 
 
 //

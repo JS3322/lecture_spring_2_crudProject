@@ -144,12 +144,12 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public FileUploadEntity getFileUploadEntity(String board_seq) {
+    public List<FileUploadEntity> getFileUploadEntity(String board_seq) {
         return fileUploadInfoRepository.findByBoardSeq(Long.parseLong(board_seq));
     }
 
     @Override
-    public FileUploadEntity getFileUploadEntity2(Long board_seq) {
+    public List<FileUploadEntity> getFileUploadEntity2(Long board_seq) {
         return fileUploadInfoRepository.findByBoardSeq(board_seq);
     }
 }

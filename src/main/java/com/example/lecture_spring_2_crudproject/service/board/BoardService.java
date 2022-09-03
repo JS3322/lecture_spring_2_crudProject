@@ -49,7 +49,7 @@ public interface BoardService {
     Long insertFileUploadEntity(FileUploadEntity fileUploadEntity);
 
 
-    FileUploadEntity getFileUploadEntity(String board_seq);
+    List<FileUploadEntity> getFileUploadEntity(String board_seq);
 
-    FileUploadEntity getFileUploadEntity2(Long board_seq);
+    List<FileUploadEntity> getFileUploadEntity2(Long board_seq);
 }
