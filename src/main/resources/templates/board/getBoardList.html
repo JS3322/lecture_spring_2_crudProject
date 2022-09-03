@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="/css/default.css">
     <title>Title</title>
-    <script src="/js/tailwind318.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+<!--    <script src="/js/tailwind318.js"></script>-->
 </head>
 <!--<p class="test">test color</p>-->
 <body th:align="center">
@@ -85,6 +86,25 @@
         </li>
     </ul>
 </section>
+
+<div class="grid grid-flow-col grid-rows-2 grid-cols-3 gap-8">
+    <div>
+        <img src="/upload/8b4bcfdd-036a-4ab6-a1c5-7cb1cf1d1538_002.png" alt="" loading="lazy">
+    </div>
+    <div class="col-start-3">
+        <img src="/upload/8b4bcfdd-036a-4ab6-a1c5-7cb1cf1d1538_002.png" alt="" loading="lazy">
+    </div>
+    <div>
+        <img src="/upload/8b4bcfdd-036a-4ab6-a1c5-7cb1cf1d1538_002.png" alt="" loading="lazy">
+    </div>
+    <div>
+        <img src="/upload/8b4bcfdd-036a-4ab6-a1c5-7cb1cf1d1538_002.png" alt="" loading="lazy">
+    </div>
+    <div class="row-start-1 col-start-2 col-span-2">
+        <img src="/upload/8b4bcfdd-036a-4ab6-a1c5-7cb1cf1d1538_002.png" alt="" loading="lazy">
+    </div>
+</div>
+
 
 <h1>게시글 목록</h1>
 <table th:align="center" border="1" th:cellpadding="0" th:cellspacing="0" th:width="700">
