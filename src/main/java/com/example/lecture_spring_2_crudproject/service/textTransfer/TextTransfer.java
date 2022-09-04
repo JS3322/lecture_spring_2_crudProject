@@ -6,9 +6,12 @@ import org.springframework.stereotype.Service;
 public class TextTransfer {
 
     public String transferText3Word(String text) throws Exception {
+        //앞의 문자열 3개만 출력하고 나머지는 *처리
 
         //java 문자열치환 내장메서드 : split, subString..
+        //매개변수 text의 앞의 0,1,2문자만 잘라서 wordFirst3 변수에 할당
         String wordFirst3 = text.substring(0,3);
+
         System.out.println("앞의 3글자 = "+wordFirst3);
         String wordLast = text.substring(4,text.length());
         System.out.println("뒤의 나머지 글자 = "+wordLast);
