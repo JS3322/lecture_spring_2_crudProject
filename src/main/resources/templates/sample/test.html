@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <title>Title</title>
+</head>
+<body>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">게시판</h1>
+    </div>
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+      <table class="table-auto w-full text-left whitespace-no-wrap">
+        <thead>
+        <tr>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">번호</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">제목</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">작성자</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">날짜</th>
+          <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">조회</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!--    1. 스프링부트에서 viewresolver를 통해 modele데이터를 타임리프 문법으로 데이터 주입(전달)-->
+        <!--                2. 클라이언트는 데이터가 들어있는 순수한 html을 다운받음-->
+        <!--                3. tailwindCSS를 캐시서버에서 받고, css와 순수한 html이 크롬 브라우저에서 랜더링이 되어 사용자에 출력 -->
+        <!--                css파일, 자바스크립트파일, html파일은 단순하게 다운받고 클라이언트에서 조립(랜더링)!!-->
+        <tr th:each="board :${boardList}">
+          <td class="px-4 py-3" th:text="${board.seq}"></td>
+          <td class="px-4 py-3"> <a th:href="@{/board/getBoard(
+                                                seq=${board.seq}
+                                                )}"
+                                    th:text="${board.title}"></a></td>
+          <td class="px-4 py-3" th:text="${board.writer}"></td>
+          <td class="px-4 py-3" th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>
+          <td class="px-4 py-3" th:text="${board.cnt}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+      <a th:href="@{/board/insertBoard}" class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">글등록</a>
+    </div>
+  </div>
+</section>
+</body>
+</html>

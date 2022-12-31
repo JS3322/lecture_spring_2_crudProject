@@ -24,7 +24,7 @@ public class SeleniumExample {
     private WebDriver driver;
     private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
 
-    private static final String WEB_DRIVER_PATH = "/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/tool/chromedriver";
+    private static final String WEB_DRIVER_PATH = "/Users/js/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/tool/chromedriver_intel";
 //    private static final String WEB_DRIVER_PATH = "C:/Cleancode/lecture_spring_2_crudProject/src/main/resources/static/tool/chromedriver";
     //메서드 매개변수로 받아서 스크래핑 동작을 위한 변수 선언
     private String base_url;

@@ -20,6 +20,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @EnableScheduling
 @SpringBootApplication
 public class LectureSpring2CrudProjectApplication {
+    //@EnableScheduling : 스크래핑이나 api 등 특정 메서드를 반복적 혹은 주기적으로 돌리는 어노테이션
+    //1. 메인 메서드 위에 @EnableScheduling 붙힘
 
     public static void main(String[] args) {
         SpringApplication.run(LectureSpring2CrudProjectApplication.class, args);

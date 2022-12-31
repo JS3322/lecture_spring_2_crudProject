@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Title</title>
+</head>
+<body>
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="flex flex-col text-center w-full mb-20">
+      <h1 class="sm:text-4xl text-3xl font-medium title-font mb-2 text-gray-900">게시판</h1>
+    </div>
+    <div class="lg:w-2/3 w-full mx-auto overflow-auto">
+      <table class="table-auto w-full text-left whitespace-no-wrap">
+        <thead>
+        <tr>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl rounded-bl">번호</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">제목</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">작성자</th>
+          <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">날짜</th>
+          <th class="w-10 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tr rounded-br">조회수</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--        <tr th:each="board :${boardList}">-->
+<!--          <td class="px-4 py-3" th:text="${board.seq}"></td>-->
+<!--          <td> <a th:href="@{/board/getBoard(-->
+<!--                                seq=${board.seq}-->
+<!--                                )}"-->
+<!--                  th:text="${board.title}"></a></td>-->
+<!--          <td th:text="${board.writer}"></td>-->
+<!--          <td th:text="${#dates.format(board.createDate, 'yyyy-MM-dd')}"></td>-->
+<!--          <td th:text="${board.cnt}"></td>-->
+<!--        </tr>-->
+        <tr>
+          <td class="px-4 py-3">seq Example</td>
+          <td class="px-4 py-3">title Example</td>
+          <td class="px-4 py-3">writer Example</td>
+          <td class="px-4 py-3 text-lg text-gray-900">createDate Example</td>
+          <td class="px-4 py-3">cnt Example</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="flex pl-4 mt-4 lg:w-2/3 w-full mx-auto">
+      <button class="flex ml-auto text-white bg-indigo-500 border-0 py-2 px-6 focus:outline-none hover:bg-indigo-600 rounded">글쓰기</button>
+    </div>
+  </div>
+</section>
+</body>
+</html>
