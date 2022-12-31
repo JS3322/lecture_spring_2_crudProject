@@ -81,19 +81,37 @@ public class TestController {
     }
 
     @ResponseBody
-    @RequestMapping("/test2")
+    @RequestMapping("/rps/v002")
     public String test2(){
         JsonObject obj =new JsonObject();
 
-        obj.addProperty("title", "테스트2");
-        obj.addProperty("content", "테스트2 내용");
+        obj.addProperty("rps", "가위");
 
         JsonObject data = new JsonObject();
 
         data.addProperty("time", "12:00");
-
+        data.addProperty("model_version", "0.0.2");
         obj.add("data", data);
 
         return obj.toString();
     }
+
+//    @ResponseBody
+//    @RequestMapping("/rps/request")
+//    public CustomAPIDtoExample rpsV0001(){
+//
+//        JsonObject obj =new JsonObject();
+//
+//        obj.addProperty("title", "테스트2");
+//        obj.addProperty("content", "테스트2 내용");
+//
+//        JsonObject data = new JsonObject();
+//
+//        data.addProperty("time", "12:00");
+//
+//        obj.add("data", data);
+//
+//        return obj.toString();
+//
+//    }
 }
